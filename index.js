@@ -2,10 +2,15 @@ const express = require('express');
 const { subscribe } = require('./apiTest');
 const app = express();
 
-const port = 5555;
+const port = process.env.PORT || 5555;
 
 app.get('/',(req,res) => {
     res.send('Home');
+})
+
+app.get('ondc/onboarding',(req,res) => {
+    console.log('ondc onboarding called');
+    console.log('res: ',res);
 })
 
 app.listen(port,() => {
