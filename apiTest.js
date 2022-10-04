@@ -29,7 +29,7 @@ const body = {
       email_id: "anand.sharma@abc.com",
       mobile_no: 9912332199,
       country: "IND",
-      subscriber_id: "ondc-demo.herokuapp.com",
+      subscriber_id: "https://ondc-demo.herokuapp.com/",
       unique_key_id: "27baa06d-f90a-486c-85e5-cc621b787f04",
       callback_url: "/ondc/onboarding",
       key_pair: {
