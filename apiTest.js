@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const { v4 } = require("uuid");
+const fs = require('fs');
 
 const url = "https://preprod.registry.ondc.org/ondc/subscribe";
 const urlTest = "https://pilot-gateway-1.beckn.nsdl.co.in/ondc/subscribe";
@@ -57,6 +58,9 @@ const subscribe = async () => {
   body.message.request_id = v4();
   body.message.entity.unique_key_id = body.message.request_id;
   body.message.timestamp = new Date().toISOString();
+  fs.writeFile('ondc-site-verification.html',body.message.request_id,'utf8',()=>{
+    console.log('done');
+  })
   
   const res = await fetch(urlTest, {
     method: "POST",
