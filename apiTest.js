@@ -2,6 +2,8 @@ const fetch = require("node-fetch");
 const { v4 } = require("uuid");
 
 const url = "https://preprod.registry.ondc.org/ondc/subscribe";
+const urlTest = "https://pilot-gateway-1.beckn.nsdl.co.in";
+
 const body = {
   context: {
     operation: {
@@ -56,7 +58,7 @@ const subscribe = async () => {
   body.message.entity.unique_key_id = body.message.request_id;
   body.message.timestamp = new Date().toISOString();
 
-  const res = await fetch(url, {
+  const res = await fetch(urlTest, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
