@@ -9,6 +9,10 @@ app.get('/',(req,res) => {
     subscribe();
 })
 
+app.get('/ondc-site-verification.html',(req,res) => {
+    res.sendFile('./ondc-site-verification.html',{root:__dirname})
+})
+
 app.get('/ondc/onboarding',(req,res) => {
     console.log('ondc onboarding called');
     console.log('res: ',res);

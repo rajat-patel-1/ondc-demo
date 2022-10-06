@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const { v4 } = require("uuid");
 
 const url = "https://preprod.registry.ondc.org/ondc/subscribe";
-const urlTest = "https://pilot-gateway-1.beckn.nsdl.co.in";
+const urlTest = "https://pilot-gateway-1.beckn.nsdl.co.in/ondc/subscribe";
 
 const body = {
   context: {
@@ -31,7 +31,7 @@ const body = {
       email_id: "anand.sharma@abc.com",
       mobile_no: 9912332199,
       country: "IND",
-      subscriber_id: "https://ondc-demo.herokuapp.com/",
+      subscriber_id: "ondc-demo.herokuapp.com",
       unique_key_id: "27baa06d-f90a-486c-85e5-cc621b787f04",
       callback_url: "/ondc/onboarding",
       key_pair: {
@@ -57,7 +57,7 @@ const subscribe = async () => {
   body.message.request_id = v4();
   body.message.entity.unique_key_id = body.message.request_id;
   body.message.timestamp = new Date().toISOString();
-
+  
   const res = await fetch(urlTest, {
     method: "POST",
     headers: {
