@@ -58,9 +58,7 @@ const subscribe = async () => {
   body.message.request_id = v4();
   body.message.entity.unique_key_id = body.message.request_id;
   body.message.timestamp = new Date().toISOString();
-  fs.writeFile('ondc-site-verification.html',body.message.request_id,'utf8',()=>{
-    console.log('done');
-  })
+  
   
   const res = await fetch(urlTest, {
     method: "POST",
