@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const { v4 } = require("uuid");
 const fs = require('fs');
+const { getKeyPairs } = require('./keyPair');
 
 const url = "https://preprod.registry.ondc.org/ondc/subscribe";
 const urlTest = "https://pilot-gateway-1.beckn.nsdl.co.in/ondc/subscribe";
@@ -58,21 +59,11 @@ const subscribe = async () => {
   body.message.request_id = v4();
   body.message.entity.unique_key_id = body.message.request_id;
   body.message.timestamp = new Date().toISOString();
-  fs.writeFile('ondc-site-verification.html',
-  `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="ondc-site-verification" content="${body.message.request_id}">
-    <title>ONDC-DEMO</title>
-</head>
-<body>
-    
-</body>
-</html>
-`
+  const {publicKey,privateKey,request_id} = getKeyPairs(body.message.request_id);
+  body.message.entity.key_pair.signing_public_key = publicKey;
+  console.log(JSON.stringify(body));
+
+  fs.writeFile('ondc-site-verification.html',`SIGNED_UNIQUE_REQ_ID=${request_id}`
   ,'utf8',()=>{
     console.log('done');
   })
